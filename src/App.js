@@ -1,8 +1,10 @@
 import { useState } from "react";
 
-// const inputName = ['ID','Name','Age','Dept'];
-
 function App() {
+  const [ID, setID] = useState(null);
+  const [fname, setfname] = useState(null);
+  const [age, setage] = useState(null);
+  const [dept, setdept] = useState(null);
   
   const [data, setdata] = useState({
     "ID": null,
@@ -10,42 +12,44 @@ function App() {
     "age": null,
     "dept": null
   });
+
+  const passData = e => {
+    e.preventDefault();
+
+    console.log('hello');
+    setdata({
+      "ID": ID,
+      "fname": fname,
+      "age": age,
+      "dept": dept
+    });
+
+    display(data);
+  }
   
   return (
     <>
       <form>
         <div className='form-group'>
           <label>ID : </label>
-          <input type='text' onChange={e => setdata({
-            "ID": e.target.value
-          })}></input>
+          <input type='text' onChange={e => setID(e.target.value)}></input>
         </div>
         <div className='form-group'>
           <label>Name : </label>
-          <input type='text' onChange={e => setdata({
-            "fname": e.target.value
-          })}></input>
+          <input type='text' onChange={e => setfname(e.target.value)}></input>
         </div>
         <div className='form-group'>
           <label>Age : </label>
-          <input type='text' onChange={e => setdata({
-            "age": e.target.value
-          })}></input>
+          <input type='text' onChange={e => setage(e.target.value)}></input>
         </div>
         <div className='form-group'>
           <label>Dept : </label>
-          <input type='text' onChange={e => setdata({
-            "dept": e.target.value
-          })}></input>
+          <input type='text' onChange={e => setdept(e.target.value)}></input>
         </div>
         <div className='form-control'>
-          <button onClick={() => display(data)}>Submit</button>
+          <button onClick={(e) => passData(e)}>Submit</button>
         </div>
       </form>
-
-      {
-        display(data)
-      }
     </>
   );
 }
@@ -55,18 +59,19 @@ const display = (props) => {
  
   const getData = {
     "ID": props.ID,
-    "fname": props.fname
+    "fname": props.fname,
+    "age": props.age,
+    "dept": props.dept
   }
 
-  console.log(getData);
-  // return (
-  //   <div>
-  //     <h2>Emp. ID : {data.ID}</h2>
-  //     <h2>Name : {data.fname}</h2>
-  //     <h3>Age : {data.age}</h3>
-  //     <h3>Dept : {data.dept}</h3>
-  //   </div>
-  // )
+  return (
+    <div>
+      <h2>Emp. ID : {getData.ID}</h2>
+      <h2>Name : {getData.fname}</h2>
+      <h3>Age : {getData.age}</h3>
+      <h3>Dept : {getData.dept}</h3>
+    </div>
+  )
 }
 
 export default App;
