@@ -15,16 +15,12 @@ function App() {
 
   const passData = e => {
     e.preventDefault();
-
-    console.log('hello');
     setdata({
       "ID": ID,
       "fname": fname,
       "age": age,
       "dept": dept
     });
-
-    display(data);
   }
   
   return (
@@ -50,6 +46,8 @@ function App() {
           <button onClick={(e) => passData(e)}>Submit</button>
         </div>
       </form>
+
+      { display(data) }
     </>
   );
 }
@@ -64,14 +62,16 @@ const display = (props) => {
     "dept": props.dept
   }
 
-  return (
-    <div>
-      <h2>Emp. ID : {getData.ID}</h2>
-      <h2>Name : {getData.fname}</h2>
-      <h3>Age : {getData.age}</h3>
-      <h3>Dept : {getData.dept}</h3>
-    </div>
-  )
+  if(getData.ID !== null) {
+    return (
+      <div>
+        <h2>Emp. ID : {getData.ID}</h2>
+        <h2>Name : {getData.fname}</h2>
+        <h3>Age : {getData.age}</h3>
+        <h3>Dept : {getData.dept}</h3>
+      </div>
+    )
+  }
 }
 
 export default App;
